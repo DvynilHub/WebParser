@@ -15,18 +15,17 @@ public class Parser {
 
         {
             try {
-                Document doc = Jsoup.connect("https://www.irgups.ru/eis/rasp/index.php?action=student&pid=2446&t=1611592703").get();
-                Elements h1Element = doc.getElementsByAttributeValue("class", "r_grp");
+                Document doc = Jsoup.connect("https://4pda.ru/").get();
+                Elements h1Element = doc.getElementsByAttributeValue("class", "list-post-title");
                 h1Element.forEach(new Consumer<Element>() {
                     @Override
                     public void accept(Element h1Element) {
                         Element aElement = h1Element.child(0);
-                        String url = aElement.attr("href");
-                        String title = aElement.child(0).text();
-                        articleList.add(new Article(url, title));
+                        String a = aElement.text();
+                        System.out.println(a);
                     }
                 });
-                articleList.forEach(System.out::println);
+
 
             } catch (IOException e) {
                 e.printStackTrace();
